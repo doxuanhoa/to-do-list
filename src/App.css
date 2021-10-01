@@ -1,0 +1,50 @@
+.App {
+  width: 100%;
+}
+
+.to-do-form {
+  width: 45%;
+  float: left;
+}
+
+.action-button {
+  min-width: 100px;
+}
+
+.todo-title {
+  font-size: larger;
+}
+.to-do-list {
+  height: 55px;
+  border: 1px solid #ccc;
+}
+.bulk-action {
+  background-color: #e0e0e0;
+  color: #000;
+}
+
+.list {
+  float: left;
+  width: 45%;
+}
+
+.form-detail {
+  border: 1px solid #ccc;
+}
+
+.item-title {
+  text-align: center;
+  line-height: 30px;
+}
+
+.rs-btn-default.rs-btn-green {
+  background-color: #5cb85c !important;
+}
+
+.rs-btn-default.rs-btn-cyan {
+  background-color: #00bcd4 !important;
+}
+
+.rs-btn-default.rs-btn-red {
+  background-color: #d9534f !important;
+}
