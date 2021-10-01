@@ -1,6 +1,27 @@
 import React from "react";
 import { DatePicker, Input, InputPicker } from "rsuite";
 
+const InputField = React.memo((props) => {
+  let { input, meta, data, handleOnChange, ...rest } = props;
+  return (
+    <React.Fragment>
+      <Input
+        {...input}
+        {...rest}
+        value={input.value}
+        onChange={(value) => {
+          input.onChange(value);
+          if (handleOnChange) handleOnChange(value);
+        }}
+      />
+
+      {meta.error && meta.touched && (
+        <span className="error">{meta.error}</span>
+      )}
+    </React.Fragment>
+  );
+});
+
 const DateField = React.memo((props) => {
   let {
     input,
@@ -12,7 +33,7 @@ const DateField = React.memo((props) => {
     placement,
     ...rest
   } = props;
-  let val = input.value ? new Date(input.value) : null;
+  let val = input.value ? new Date(input.value) : new Date();
   return (
     <React.Fragment>
       <DatePicker
@@ -65,27 +86,6 @@ const RSTextAreaField = React.memo((props) => {
         <span className="error">{meta.error}</span>
       )}
     </div>
-  );
-});
-
-const InputField = React.memo((props) => {
-  let { input, meta, data, handleOnChange, ...rest } = props;
-  return (
-    <React.Fragment>
-      <Input
-        {...input}
-        {...rest}
-        value={input.value}
-        onChange={(value) => {
-          input.onChange(value);
-          if (handleOnChange) handleOnChange(value);
-        }}
-      />
-
-      {meta.error && meta.touched && (
-        <span className="error">{meta.error}</span>
-      )}
-    </React.Fragment>
   );
 });
 

@@ -37,8 +37,6 @@ export default function Home() {
   const onUpdateItem = (item) => {
     let index = data.findIndex((s) => s.id === item.id);
     data[index] = item;
-    console.log(`index update`, index);
-    console.log(`values`, item);
     localStorage.setItem("list", JSON.stringify(data));
     reloadData();
   };
@@ -56,7 +54,6 @@ export default function Home() {
 
   const onRemoveItem = (id) => {
     let index = data.findIndex((s) => s.id === id);
-    console.log(`index: `, index);
     data.splice(index, 1);
     localStorage.setItem("list", JSON.stringify(data));
     reloadData();

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   DateField,
   InputField,
@@ -60,12 +60,7 @@ export default function TodoForm({ type, taskData, onSave, ...props }) {
                 <div className="col-12 col-lg-4 offset-lg-2 mb-3">
                   <FormGroup>
                     <ControlLabel>Due Date</ControlLabel>
-                    <Field
-                      name="dueDate"
-                      component={DateField}
-                      value="2021-02-24T15:08:26.4714711"
-                      block
-                    />
+                    <Field name="dueDate" component={DateField} block />
                   </FormGroup>
                 </div>
 

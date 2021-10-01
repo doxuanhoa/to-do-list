@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { ButtonToolbar, Button, Checkbox, Input } from "rsuite";
-import Detail from "./Detail";
 import TodoForm from "./TodoForm";
 
 export default function TodoList({
@@ -21,7 +20,6 @@ export default function TodoList({
   };
 
   const onRemoveBulk = () => {
-    console.log(`bulk`, checkedKeys);
     onRemoveMany(checkedKeys);
   };
 
@@ -31,7 +29,6 @@ export default function TodoList({
       : [...checkedKeys, id];
     setCheckedKeys(tempCheck);
     // setCheckedKeys([...checkedKeys, id]);
-    console.log(`checkedKeys`, checkedKeys);
   };
 
   return (
@@ -69,35 +66,43 @@ export default function TodoList({
 
         {data.map((item, key) => (
           <>
-            <div className="to-do-list todo-item mt-4">
-              <div className="d-flex justify-content-between align-middle">
+            <div class="d-flex bd-highlight to-do-list mt-4">
+              <div class="p-2 bd-highlight">
                 <Checkbox onChange={() => handleCheck(item.id)} />
-                <div className=" mt-2 ">
-                  <span className="item-title">{item.task}</span>
-                </div>
-                <div className="d-flex justify-content-between align-items-end mt-2 mr-2">
-                  <ButtonToolbar className="d-flex ">
-                    <Button
-                      className="ml-2  action-button"
-                      color="cyan"
-                      onClick={() => handleShowDetail(item.id)}
-                    >
-                      Detail
-                    </Button>
-                    <Button
-                      className="ml-2  action-button"
-                      color="red"
-                      onClick={() => onRemove(item.id)}
-                    >
-                      Remove
-                    </Button>
-                  </ButtonToolbar>
-                </div>
+              </div>
+              <div class="p-2 flex-grow-1 bd-highlight">
+                <span className="item-title">{item.task}</span>
+              </div>
+              <div class="p-2 bd-highlight">
+                {" "}
+                <Button
+                  className="ml-2  action-button"
+                  color="cyan"
+                  onClick={() => handleShowDetail(item.id)}
+                >
+                  Detail
+                </Button>
+              </div>
+              <div class="p-2 bd-highlight">
+                <Button
+                  className="ml-2  action-button"
+                  color="red"
+                  onClick={() => onRemove(item.id)}
+                >
+                  Remove
+                </Button>
               </div>
             </div>
 
             {expandId === item.id && isShowDetail && (
-              <TodoForm taskData={item} type="update" onSave={onUpdateItem} />
+              <TodoForm
+                taskData={item}
+                type="update"
+                onSave={(values) => {
+                  onUpdateItem(values);
+                  setIsShowDetail(!isShowDetail);
+                }}
+              />
             )}
           </>
         ))}
