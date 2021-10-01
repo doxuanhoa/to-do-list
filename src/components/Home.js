@@ -22,27 +22,33 @@ export default function Home() {
 
   const reloadData = () => {
     setLoadList(!loadList);
+    Alert.success("Successful!", 2000);
   };
 
   const onSaveItem = (values) => {
     let list = JSON.parse(localStorage.getItem("list")) || [];
-    console.log(`object`, values);
     localStorage.setItem(
       "list",
       JSON.stringify([...list, { ...values, id: new Date().getTime() }])
     );
     reloadData();
-    Alert.success("Successful!", 2000);
-    console.log(`list`, list);
   };
 
-  const onUpdateItem = (id) => {
-    console.log(`id update`, id);
+  const onUpdateItem = (item) => {
+    let index = data.findIndex((s) => s.id === item.id);
+    data[index] = item;
+    console.log(`index update`, index);
+    console.log(`values`, item);
+    localStorage.setItem("list", JSON.stringify(data));
+    reloadData();
   };
 
   const onRemoveBulk = (arr) => {
+    let arrIndex = arr.map(function (word) {
+      return data.findIndex((s) => s.id === word);
+    });
     let newData = data.filter((value, index) => {
-      return arr.indexOf(index) == -1;
+      return arrIndex.indexOf(index) == -1;
     });
     localStorage.setItem("list", JSON.stringify(newData));
     reloadData();
@@ -54,28 +60,26 @@ export default function Home() {
     data.splice(index, 1);
     localStorage.setItem("list", JSON.stringify(data));
     reloadData();
-    Alert.success("Successful!", 2000);
   };
 
   const onSearchData = (value) => {
     setValueSearch(value);
-    console.log(`value`, value);
     let search = data.filter((newData) => {
       return newData.task.toUpperCase().includes(value.toUpperCase());
     });
     setDataSearch(search);
-    console.log(`dataSearch`, dataSearch);
     reloadData();
   };
 
   return (
     <div>
-      <TodoForm onSave={onSaveItem} onRemoveMany={onRemoveBulk} />
+      <TodoForm onSave={onSaveItem} />
       <TodoList
         data={data}
         onRemove={onRemoveItem}
         onUpdateItem={onUpdateItem}
         onSearch={onSearchData}
+        onRemoveMany={onRemoveBulk}
       />
     </div>
   );
