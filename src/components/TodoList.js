@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ButtonToolbar, Button, Checkbox, Input } from "rsuite";
+import { Button, Checkbox, Input } from "rsuite";
 import TodoForm from "./TodoForm";
 
 export default function TodoList({
@@ -16,7 +16,6 @@ export default function TodoList({
 
   const handleShowDetail = (id) => {
     setExpandId(id);
-    setIsShowDetail(!isShowDetail);
   };
 
   const onRemoveBulk = () => {
@@ -28,7 +27,6 @@ export default function TodoList({
       ? checkedKeys.filter((item) => item !== id)
       : [...checkedKeys, id];
     setCheckedKeys(tempCheck);
-    // setCheckedKeys([...checkedKeys, id]);
   };
 
   return (
@@ -95,13 +93,13 @@ export default function TodoList({
               </div>
             </div>
 
-            {expandId === item.id && isShowDetail && (
+            {expandId === item.id && (
               <TodoForm
                 taskData={item}
                 type="update"
                 onSave={(values) => {
                   onUpdateItem(values);
-                  setIsShowDetail(!isShowDetail);
+                  setExpandId(null);
                 }}
               />
             )}
