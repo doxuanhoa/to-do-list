@@ -65,7 +65,7 @@ export default function Home() {
       return newData.task.toUpperCase().includes(value.toUpperCase());
     });
     setDataSearch(search);
-    reloadData();
+    setLoadList(!loadList);
   };
 
   return (

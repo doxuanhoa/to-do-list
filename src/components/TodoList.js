@@ -41,27 +41,28 @@ export default function TodoList({
         <Input placeholder="Search..." onChange={(e) => onSearch(e)} />
 
         {checkedKeys.length > 0 && (
-          <div className="to-do-list bulk-action mt-4">
-            <div className="d-flex justify-content-between align-middle">
-              <div className=" mt-2 ">
+          <>
+            <div class="d-flex bd-highlight to-do-list mt-4 bulk-action">
+              <div class="p-2 flex-grow-1 bd-highlight">
                 <span className="todo-title ml-3 ">Bulk Action</span>
               </div>
-              <div className="d-flex justify-content-between align-items-end mt-2 mr-2">
-                <ButtonToolbar className="d-flex ">
-                  <Button className="ml-2  action-button" color="blue">
-                    Done
-                  </Button>
-                  <Button
-                    className="ml-2  action-button"
-                    color="red"
-                    onClick={onRemoveBulk}
-                  >
-                    Remove
-                  </Button>
-                </ButtonToolbar>
+              <div class="p-2 bd-highlight">
+                {" "}
+                <Button className="ml-2  action-button" color="blue">
+                  Done
+                </Button>
+              </div>
+              <div class="p-2 bd-highlight">
+                <Button
+                  className="ml-2  action-button"
+                  color="red"
+                  onClick={onRemoveBulk}
+                >
+                  Remove
+                </Button>
               </div>
             </div>
-          </div>
+          </>
         )}
 
         {data.map((item, key) => (
